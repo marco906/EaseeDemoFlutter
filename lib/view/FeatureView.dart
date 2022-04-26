@@ -1,4 +1,4 @@
-import 'package:easee_demo/view/styles.dart';
+import 'package:easee_demo/view/Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

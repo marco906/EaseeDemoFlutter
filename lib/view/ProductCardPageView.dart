@@ -1,7 +1,9 @@
+import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../model/Model.dart';
 import 'ProductCardView.dart';
-import 'styles.dart';
+import 'Styles.dart';
 
 class ProductCardPageView extends StatefulWidget {
   @override
@@ -18,6 +20,7 @@ class _ProductCardPageViewState extends State<ProductCardPageView> {
     super.dispose();
   }
 
+  // updates the page index for display in HeaderView
   _onPageViewChange(int page) {
     setState(() { _pageIndex = page; });
   }
@@ -38,8 +41,8 @@ class _ProductCardPageViewState extends State<ProductCardPageView> {
               child: PageView(
                 controller: _controller,
                 children: [
-                  ProductCardView(),
-                  ProductCardView(),
+                  ProductCardView(chargeRobot: ChargeRobot(name: 'GARAGE 1', color: 'blue')),
+                  ProductCardView(chargeRobot: ChargeRobot(name: 'GARAGE 2', color: 'white')),
                 ],
                 onPageChanged: _onPageViewChange,
               ),
@@ -61,37 +64,22 @@ class HeaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
+    return Row(
         children: [
-          SizedBox(
-            width: 80,
-            child: Row(
-              children: [
-                Icon(CupertinoIcons.wifi, color: CupertinoColors.black),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Text('WiFi', style: SFTextStyle.subheadline),
-                ),
-              ],
-            ),
-          ),
+          Row(
+            children: [
+              Icon(CupertinoIcons.wifi, color: CupertinoColors.black),
+              Text('WiFi', style: SFTextStyle.subheadline)
+                  .padding(leading: 4),
+            ],
+          ).frame(width: 80),
           Spacer(),
           Text('${pageIndex + 1}/2', style: SFTextStyle.subheadline.c(CupertinoColors.secondaryLabel)),
           Spacer(),
-          SizedBox(
-            width: 80,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(CupertinoIcons.info_circle, color: CupertinoColors.black),
-                ],
-              )
-          ),
+          Icon(CupertinoIcons.info_circle, color: CupertinoColors.black)
+              .alignment(alignment: Alignment.centerRight)
+              .frame(width: 80),
         ],
-      ),
-    );
+      ).padding(all: 16);
   }
 }
-

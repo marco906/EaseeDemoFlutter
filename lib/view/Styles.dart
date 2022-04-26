@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-// Apple San Francisco font sizes
+// Apple San Francisco font size mapping
 class SFFontSize {
   static double get largeTitle => 34;
   static double get title => 28;
@@ -13,7 +13,7 @@ class SFFontSize {
   static double get caption => 12;
 }
 
-// Apple San Francisco font weights
+// Apple San Francisco font weight mapping
 extension SFFontWeight on FontWeight {
   static FontWeight get black => FontWeight.w900;
   static FontWeight get heavy => FontWeight.w800;
@@ -26,7 +26,7 @@ extension SFFontWeight on FontWeight {
   static FontWeight get ultraThin => FontWeight.w100;
 }
 
-// TextStyle shortcuts
+// TextStyle font shortcuts
 class SFTextStyle {
   static TextStyle get largeTitle => TextStyle(fontSize: SFFontSize.largeTitle);
   static TextStyle get title => TextStyle(fontSize: SFFontSize.title);
@@ -40,6 +40,7 @@ class SFTextStyle {
   static TextStyle get caption => TextStyle(fontSize: SFFontSize.caption);
 }
 
+// TextStyle modifiers
 extension TextStyleExtend on TextStyle {
   TextStyle w(FontWeight value) => copyWith(fontWeight: value);
   TextStyle c(Color value) => copyWith(color: value);

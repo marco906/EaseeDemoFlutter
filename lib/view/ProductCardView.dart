@@ -1,13 +1,15 @@
+import 'package:easee_demo/model/Model.dart';
+import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'FeatureView.dart';
-import 'styles.dart';
+import 'Styles.dart';
 
 class ProductCardView extends StatelessWidget {
-  const ProductCardView({
-    Key? key,
-  }) : super(key: key);
+  const ProductCardView({ Key? key, required this.chargeRobot });
+
+  final ChargeRobot chargeRobot;
 
   @override
   Widget build(BuildContext context) {
@@ -16,27 +18,28 @@ class ProductCardView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(bottom: 8),
-            child: Text('Charging', style: SFTextStyle.title2.w(SFFontWeight.semibold)),
-          ),
-          Text('GARAGE 1', style: SFTextStyle.subheadline
+          Text('Charging', style: SFTextStyle.title2.w(SFFontWeight.semibold))
+            .padding(bottom: 8),
+          Text(chargeRobot.name, style: SFTextStyle.subheadline
               .w(SFFontWeight.medium)
               .c(CupertinoColors.tertiaryLabel)),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
-            child: Image.asset('assets/blue.png', height: 200),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: const [
-                FeatureView(icon: CupertinoIcons.lock, title: 'Cable', subtitle: 'Locked'),
-                Spacer(),
-                FeatureView(icon: CupertinoIcons.lock_open, title: 'Access', subtitle: 'Open', leading: false),
-              ],
-            ),
-          ),
+          Image.asset('assets/${chargeRobot.color}.png', height: 200)
+            .padding(vertical: 8)
+            .padding(top: 12),
+          Row(
+            children: const [
+              FeatureView(
+                  icon: CupertinoIcons.lock,
+                  title: 'Cable',
+                  subtitle: 'Locked'),
+              Spacer(),
+              FeatureView(
+                  icon: CupertinoIcons.lock_open,
+                  title: 'Access',
+                  subtitle: 'Open',
+                  leading: false),
+            ],
+          ).padding(all: 16),
           Stack(
             alignment: Alignment.center,
             children: [
