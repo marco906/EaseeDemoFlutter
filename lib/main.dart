@@ -1,3 +1,5 @@
+
+import 'package:easee_demo/view/ProductCardPageView.dart';
 import 'package:easee_demo/view/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Sample Code'),
+        middle: Text('Home'),
         backgroundColor: Colors.white,
         trailing: Icon(
           CupertinoIcons.chevron_down,
@@ -33,30 +35,9 @@ class HomeScreen extends StatelessWidget {
           size: SFFontSize.title2,
         ),
       ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Charging', style: SFTextStyle.title2.w(SFFontWeight.semibold)),
-                ),
-              Text('Garage 1', style: SFTextStyle.subheadline
-                  .w(SFFontWeight.medium)
-                  .c(CupertinoColors.tertiaryLabel)),
-              Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Image.asset('assets/blue.png', height: 200),
-              ),
-              const Icon(
-                Icons.power_outlined,
-                color: Colors.black,
-                size: 30.0,
-              ),
-            ],
-          ),
-        ),
+        child: ProductCardPageView(),
     );
   }
 }
+
 
