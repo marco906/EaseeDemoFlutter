@@ -1,6 +1,4 @@
-
-import 'package:easee_demo/view/ProductCardPageView.dart';
-import 'package:easee_demo/view/Styles.dart';
+import 'package:easee_demo/view/MainMenuView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,19 +23,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('Home'),
-        backgroundColor: Colors.white,
-        trailing: Icon(
-          CupertinoIcons.chevron_down,
-          color: Colors.black,
-          size: SFFontSize.title2,
-        ),
-      ),
-        child: ProductCardPageView(),
-    );
+    return MainMenuView();
   }
 }
+
+
+
+
+
 
 

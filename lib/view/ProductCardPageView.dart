@@ -27,13 +27,13 @@ class _ProductCardPageViewState extends State<ProductCardPageView> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
+    return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
           color: CupertinoColors.systemGroupedBackground,
         ),
         child: Column(
+          //shrinkWrap: true,
           children: [
             HeaderView(pageIndex: _pageIndex),
             SizedBox(
@@ -41,16 +41,15 @@ class _ProductCardPageViewState extends State<ProductCardPageView> {
               child: PageView(
                 controller: _controller,
                 children: [
-                  ProductCardView(chargeRobot: ChargeRobot(name: 'GARAGE 1', color: 'blue')),
-                  ProductCardView(chargeRobot: ChargeRobot(name: 'GARAGE 2', color: 'white')),
+                  ProductCardView(robot: ChargeRobot(name: 'GARAGE 1', color: 'blue')),
+                  ProductCardView(robot: ChargeRobot(name: 'GARAGE 2', color: 'white')),
                 ],
                 onPageChanged: _onPageViewChange,
               ),
             )
           ],
         ),
-      ),
-    );
+      );
   }
 }
 

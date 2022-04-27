@@ -7,9 +7,9 @@ import 'FeatureView.dart';
 import 'Styles.dart';
 
 class ProductCardView extends StatelessWidget {
-  const ProductCardView({ Key? key, required this.chargeRobot });
+  const ProductCardView({ Key? key, required this.robot });
 
-  final ChargeRobot chargeRobot;
+  final ChargeRobot robot;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +20,10 @@ class ProductCardView extends StatelessWidget {
         children: <Widget>[
           Text('Charging', style: SFTextStyle.title2.w(SFFontWeight.semibold))
             .padding(bottom: 8),
-          Text(chargeRobot.name, style: SFTextStyle.subheadline
+          Text(robot.name, style: SFTextStyle.subheadline
               .w(SFFontWeight.medium)
               .c(CupertinoColors.tertiaryLabel)),
-          Image.asset('assets/${chargeRobot.color}.png', height: 200)
+          Image.asset('assets/${robot.color}.png', height: 200)
             .padding(vertical: 8)
             .padding(top: 12),
           Row(
@@ -51,7 +51,7 @@ class ProductCardView extends StatelessWidget {
                 ),
                 child: Row(
                   children: const [
-                    FeatureView(icon: CupertinoIcons.bolt, title: '18A', subtitle: 'Avialable'),
+                    FeatureView(icon: CupertinoIcons.bolt, title: '18A', subtitle: 'Available'),
                     Spacer(),
                     FeatureView(icon: CupertinoIcons.clock, title: 'Schedule', subtitle: 'Default', leading: false),
                   ],
