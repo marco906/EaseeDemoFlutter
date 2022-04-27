@@ -34,31 +34,41 @@ class ChargeRobot extends ChangeNotifier {
 // Charge site that can contain multiple charge robots
 class ChargeSite {
   final String name;
+  final int consumption;
   List<ChargeRobot> chargers;
 
   ChargeSite({
     required this.name,
+    required this.consumption,
     required this.chargers,
   });
 
   // Preview objects
   static ChargeSite get preview =>
       ChargeSite(name: "Home",
+          consumption: 2049,
           chargers: [
             ChargeRobot(name: "GARAGE 1", color: 'blue'),
             ChargeRobot(name: "GARAGE 2", color: 'white'),
           ]);
   static ChargeSite get preview2 =>
       ChargeSite(name: "Cabin",
+          consumption: 712,
           chargers: [
             ChargeRobot(name: "CARPORT", color: 'red'),
           ]);
 }
 
 // Global model that holds the users charge sites
-class Model {
+class Model extends ChangeNotifier {
   Model({ required this.sites });
   List<ChargeSite> sites;
+  ChargeSite? currentSite;
+
+  void setCurrentChargeSite(ChargeSite? site) {
+    currentSite = site;
+    notifyListeners();
+  }
 
   // Preview object
   static Model get preview =>

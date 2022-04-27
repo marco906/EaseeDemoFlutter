@@ -1,6 +1,7 @@
 import 'package:easee_demo/model/Model.dart';
 import 'package:easee_demo/view/ProductCardPageView.dart';
 import 'package:easee_demo/view/SiteDetailView.dart';
+import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,36 +21,69 @@ class SiteView extends StatelessWidget {
         middle: Text(site.name),
         backgroundColor: Colors.white,
         border: null,
-        trailing: GestureDetector(
+        transitionBetweenRoutes: MediaQuery.of(context).size.width < 550,
+        trailing: (MediaQuery.of(context).size.width < 800) ? GestureDetector(
           child: const Icon(CupertinoIcons.chevron_up),
-            // cant do this because controller not yet attached to DragSheet ?
-            //.rotation(angle: (1.0 - minCardHeight - _controller.size) * 180),
           onTap: () { toggleCard(); }
-        )
+        ) : null
       ),
-      child: Stack(
+      child: Row(
         children: [
-          SiteDetailView(),
-          DraggableScrollableSheet(
-              initialChildSize: minCardHeight,
-              minChildSize: minCardHeight,
-              snap: true,
-              controller: _controller,
-              builder: (BuildContext context, ScrollController scrollController) {
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(32),
-                    color: CupertinoColors.systemGroupedBackground,
+          if (MediaQuery.of(context).size.width < 800) ...[
+            // Phone
+            Expanded(
+              child: Stack(
+                children: [
+                  SiteDetailView(site: site),
+                  DraggableScrollableSheet(
+                      initialChildSize: minCardHeight,
+                      minChildSize: minCardHeight,
+                      snap: true,
+                      controller: _controller,
+                      builder: (BuildContext context, ScrollController scrollController) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(32),
+                            color: CupertinoColors.systemGroupedBackground,
+                          ),
+                          child: ListView(
+                            controller: scrollController,
+                            children: [
+                              ProductCardPageView(site: site,)
+                            ],
+                          ),
+                        );
+                      }
                   ),
-                  child: ListView(
-                    controller: scrollController,
-                    children: [
-                      ProductCardPageView(site: site,)
-                    ],
-                  ),
-                );
-              }
-          ),
+                ],
+              ),
+            ),
+          ] else ...[
+            // Tablet
+            Expanded(child: SiteDetailView(site: site)),
+            buildProductPageView(null, 32)
+            .frame(width: 400)
+          ]
+
+        ],
+      ),
+    );
+  }
+
+  // Product page view in ListView
+  Container buildProductPageView(ScrollController? scrollController, double margin) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: margin, horizontal: margin/2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        color: CupertinoColors.systemGroupedBackground,
+      ),
+      child: ListView(
+        controller: scrollController,
+        children: [
+          ProductCardPageView(
+            site: site,
+          )
         ],
       ),
     );

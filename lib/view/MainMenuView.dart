@@ -12,8 +12,10 @@ class MainMenuView extends StatelessWidget {
   const MainMenuView({
     Key? key,
     required this.model,
+    this.sidebar = false,
   }) : super(key: key);
   final Model model;
+  final bool sidebar;
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +33,28 @@ class MainMenuView extends StatelessWidget {
                 ProfileHeader(),
               ],
             ),
-
-            Section(
-              headline: 'Charging Sites',
-              separatorInset: 50,
-              children: [
-                // dynamic list of charging sites
-                for (var site in model.sites)
+            Section(headline: 'Charging Sites', separatorInset: 50, children: [
+              // dynamic list of charging sites
+              for (var site in model.sites)
+                if (sidebar) ...[
+                  // Sidebar link
+                  CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    child: LabelView(title: site.name, icon: Icons.ev_station_outlined),
+                    onPressed: () { model.setCurrentChargeSite(site); },
+                  )
+                ] else ...[
+                  // Stack Nav link
                   NavigationLink(title: site.name, icon: Icons.ev_station_outlined, destination: SiteView(site: site))
-              ],
-
-            ),
-            Section(
+                ]
+            ]),
+            const Section(
               headline: 'My easee',
               separatorInset: 50,
               children: [
-                const NavigationLink(title: 'Easee Keys', icon: Icons.key_outlined, destination: DummyLink(title: 'Keys')),
+                NavigationLink(title: 'Easee Keys', icon: Icons.key_outlined, destination: DummyLink(title: 'Keys')),
                 NavigationLink(title: 'Notifications', icon: CupertinoIcons.bell, destination: NotificationsView()),
-                const NavigationLink(title: 'Settings', icon: CupertinoIcons.gear, destination: DummyLink(title: 'Settings')),
+                NavigationLink(title: 'Settings', icon: CupertinoIcons.gear, destination: DummyLink(title: 'Settings')),
               ],
             ),
 

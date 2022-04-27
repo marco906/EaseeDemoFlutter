@@ -1,3 +1,4 @@
+import 'package:easee_demo/model/Model.dart';
 import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,9 @@ import 'MainMenuView.dart';
 import 'Styles.dart';
 
 class SiteDetailView extends StatefulWidget {
+  const SiteDetailView({Key? key, required this.site}) : super(key: key);
+  final ChargeSite site;
+
   @override
   _SiteDetailViewState createState() => _SiteDetailViewState();
 }
@@ -58,12 +62,12 @@ class _SiteDetailViewState extends State<SiteDetailView> {
     switch (period) {
       case 0:
         // Month
-        return 230;
+        return (widget.site.consumption / 12).round();
       case 1:
         // Year
-        return 2049;
+        return widget.site.consumption;
       default:
-        return 6723;
+        return widget.site.consumption * 3;
     }
   }
 
@@ -109,7 +113,7 @@ class OptionButton extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            CupertinoPageRoute(builder: (context) => DummyLink(title: title)),
+            CupertinoPageRoute(fullscreenDialog: false, builder: (context) => DummyLink(title: title)),
           );
         },
       ),

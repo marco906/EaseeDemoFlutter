@@ -28,7 +28,7 @@ class FeatureView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: leading ? CrossAxisAlignment.start : CrossAxisAlignment.end,
             children: [
-              Text(title, style: SFTextStyle.subheadline),
+              Text(title, style: SFTextStyle.subheadline.w(SFFontWeight.medium)),
               Text(subtitle, style: SFTextStyle.footnote.c(CupertinoColors.secondaryLabel)),
             ],
           ),

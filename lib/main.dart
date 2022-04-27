@@ -1,4 +1,6 @@
 import 'package:easee_demo/view/MainMenuView.dart';
+import 'package:easee_demo/view/SiteView.dart';
+import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'model/Model.dart';
@@ -9,12 +11,40 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   // Root screen
   Widget build(BuildContext context) {
     return CupertinoApp(
-      home: MainMenuView(model: Model.preview),
+      home: HomeView(),
       title: 'Easee',
+    );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  HomeView({ Key? key}) : super(key: key);
+
+  final model = Model.preview;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        if (MediaQuery.of(context).size.width < 550) ...[
+          // phone stack view
+          Expanded(child: MainMenuView(model: model)),
+        ] else ...[
+          // tablet splitview
+          MainMenuView(model: model, sidebar: true).frame(width: 300),
+          AnimatedBuilder(
+            animation: model,
+            builder: (context, widget) {
+              return Expanded(child: SiteView(site: model.currentSite ?? ChargeSite.preview));
+            },
+          )
+        ]
+      ],
     );
   }
 }
