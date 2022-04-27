@@ -40,13 +40,13 @@ class _SiteDetailViewState extends State<SiteDetailView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleButton(icon: CupertinoIcons.chevron_back),
+              const CircleButton(icon: CupertinoIcons.chevron_back),
               Text(periodLabel(selectedPeriod ?? 0), style: SFTextStyle.subheadline),
-              CircleButton(icon: Icons.power_input_rounded),
+              const CircleButton(icon: Icons.power_input_rounded),
             ],
           ).padding(vertical: 16),
-          OptionButton(title: 'Power management').padding(vertical: 8),
-          OptionButton(title: 'Site settings'),
+          const OptionButton(title: 'Power management').padding(vertical: 8),
+          const OptionButton(title: 'Site settings'),
         ],
       ).padding(all: 16);
   }
@@ -100,7 +100,7 @@ class OptionButton extends StatelessWidget {
         child: Row(
           children: [
             Text(title, style: SFTextStyle.body.c(Colors.black)),
-            Spacer(),
+            const Spacer(),
             Icon(CupertinoIcons.chevron_forward,
                 color: CupertinoColors.secondaryLabel,
                 size: SFFontSize.body)

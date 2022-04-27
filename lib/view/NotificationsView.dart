@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'MainMenuView.dart';
 
 class NotificationsView extends StatefulWidget {
+  const NotificationsView({Key? key}) : super(key: key);
+
   @override
   _NotificationsViewState createState() => _NotificationsViewState();
 }
@@ -27,7 +29,7 @@ class _NotificationsViewState extends State<NotificationsView> {
           Section(
             headline: 'Charging',
             children: [
-              Toggle(title: 'Charge etarted', isActive: notfiChargeStart, onChanged: (value) {
+              Toggle(title: 'Charge started', isActive: notfiChargeStart, onChanged: (value) {
                   setState(() { notfiChargeStart = value;});
               }),
               Toggle(title: 'Charge ended', isActive: notfiChargeEnd, onChanged: (value) {

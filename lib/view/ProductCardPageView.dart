@@ -44,10 +44,10 @@ class _ProductCardPageViewState extends State<ProductCardPageView> {
                 onPageChanged: _onPageViewChange,
               ),
             ),
-            OptionButton(title: 'Power options', color: CupertinoColors.white)
+            const OptionButton(title: 'Power options', color: CupertinoColors.white)
                 .padding(horizontal: 16)
                 .padding(vertical:4),
-            OptionButton(title: 'Charger settings', color: CupertinoColors.white)
+            const OptionButton(title: 'Charger settings', color: CupertinoColors.white)
                 .padding(horizontal: 16)
                 .padding(vertical:4),
           ],
@@ -70,15 +70,15 @@ class HeaderView extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(CupertinoIcons.wifi, color: CupertinoColors.black),
+              const Icon(CupertinoIcons.wifi, color: CupertinoColors.black),
               Text('WiFi', style: SFTextStyle.subheadline)
                   .padding(leading: 4),
             ],
           ).frame(width: 80),
-          Spacer(),
+          const Spacer(),
           Text('${pageIndex + 1}/$pageCount', style: SFTextStyle.subheadline.c(CupertinoColors.secondaryLabel)),
-          Spacer(),
-          Icon(CupertinoIcons.info_circle, color: CupertinoColors.black)
+          const Spacer(),
+          const Icon(CupertinoIcons.info_circle, color: CupertinoColors.black)
               .alignment(alignment: Alignment.centerRight)
               .frame(width: 80),
         ],

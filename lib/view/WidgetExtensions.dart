@@ -43,6 +43,15 @@ extension WidgetModifier on Widget {
         child: this,
       );
 
+  Widget rotation({
+    Key? key,
+    required double angle,
+  }) =>
+      Transform.rotate(
+        key: key,
+        angle: angle * 3.1415926/180 ,
+        child: this,
+      );
 
   Widget frame({
     Key? key,

@@ -1,16 +1,17 @@
 import 'package:easee_demo/model/Model.dart';
 import 'package:easee_demo/view/ProductCardPageView.dart';
 import 'package:easee_demo/view/SiteDetailView.dart';
-import 'package:easee_demo/view/Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SiteView extends StatelessWidget {
-  const SiteView({
+  SiteView({
     Key? key,
     required this.site,
   }) : super(key: key);
   final ChargeSite site;
+  final double minCardHeight = 0.5;
+  final _controller = DraggableScrollableController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +20,21 @@ class SiteView extends StatelessWidget {
         middle: Text(site.name),
         backgroundColor: Colors.white,
         border: null,
-        trailing: Icon(
-          CupertinoIcons.chevron_down,
-          color: Colors.black,
-          size: SFFontSize.title2,
-        ),
+        trailing: GestureDetector(
+          child: const Icon(CupertinoIcons.chevron_up),
+            // cant do this because controller not yet attached to DragSheet ?
+            //.rotation(angle: (1.0 - minCardHeight - _controller.size) * 180),
+          onTap: () { toggleCard(); }
+        )
       ),
       child: Stack(
         children: [
           SiteDetailView(),
           DraggableScrollableSheet(
-              initialChildSize: 0.5,
-              minChildSize: 0.5,
+              initialChildSize: minCardHeight,
+              minChildSize: minCardHeight,
               snap: true,
+              controller: _controller,
               builder: (BuildContext context, ScrollController scrollController) {
                 return Container(
                   decoration: BoxDecoration(
@@ -50,5 +53,12 @@ class SiteView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void toggleCard() {
+    _controller.animateTo(
+        _controller.size == 1.0 ? minCardHeight : 1.0,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.elasticInOut);
   }
 }

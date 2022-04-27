@@ -6,14 +6,27 @@ class ChargeRobot extends ChangeNotifier {
   final String color;
 
   bool isCharging = false;
+  bool isCableLocked = true;
+  bool isAccessLocked = false;
 
   ChargeRobot({
     required this.name,
     required this.color
   });
 
+  // Methods to notify listeners
   void setCharging(bool value) {
     isCharging = value;
+    notifyListeners();
+  }
+
+  void setCableLocked(bool value) {
+    isCableLocked = value;
+    notifyListeners();
+  }
+
+  void setAccessLocked(bool value) {
+    isAccessLocked = value;
     notifyListeners();
   }
 }
@@ -42,7 +55,7 @@ class ChargeSite {
           ]);
 }
 
-// Global model that hold users charge site and settings
+// Global model that holds the users charge sites
 class Model {
   Model({ required this.sites });
   List<ChargeSite> sites;
