@@ -1,3 +1,4 @@
+import 'package:easee_demo/model/Model.dart';
 import 'package:easee_demo/view/ProductCardPageView.dart';
 import 'package:easee_demo/view/SiteDetailView.dart';
 import 'package:easee_demo/view/Styles.dart';
@@ -7,13 +8,15 @@ import 'package:flutter/material.dart';
 class SiteView extends StatelessWidget {
   const SiteView({
     Key? key,
+    required this.site,
   }) : super(key: key);
+  final ChargeSite site;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: const Text('Home'),
+        middle: Text(site.name),
         backgroundColor: Colors.white,
         border: null,
         trailing: Icon(
@@ -30,11 +33,17 @@ class SiteView extends StatelessWidget {
               minChildSize: 0.5,
               snap: true,
               builder: (BuildContext context, ScrollController scrollController) {
-                return ListView(
-                  controller: scrollController,
-                  children: [
-                    ProductCardPageView()
-                  ],
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: CupertinoColors.systemGroupedBackground,
+                  ),
+                  child: ListView(
+                    controller: scrollController,
+                    children: [
+                      ProductCardPageView(site: site,)
+                    ],
+                  ),
                 );
               }
           ),

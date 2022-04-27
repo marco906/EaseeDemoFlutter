@@ -33,6 +33,17 @@ extension WidgetModifier on Widget {
         child: this,
       );
 
+  Widget opacity({
+    Key? key,
+    required double value,
+  }) =>
+      Opacity(
+        key: key,
+        opacity: value,
+        child: this,
+      );
+
+
   Widget frame({
     Key? key,
     double? width,

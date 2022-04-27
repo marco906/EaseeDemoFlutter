@@ -1,14 +1,19 @@
+import 'package:easee_demo/model/Model.dart';
 import 'package:easee_demo/view/SiteView.dart';
+import 'package:easee_demo/view/NotificationsView.dart';
 import 'package:easee_demo/view/Styles.dart';
 import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 // Main menu or sidebar view
 class MainMenuView extends StatelessWidget {
   const MainMenuView({
     Key? key,
+    required this.model,
   }) : super(key: key);
+  final Model model;
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +31,32 @@ class MainMenuView extends StatelessWidget {
                 ProfileHeader(),
               ],
             ),
+
             Section(
               headline: 'Charging Sites',
+              separatorInset: 50,
               children: [
-                NavigationLink(title: 'Home', icon: Icons.ev_station_outlined, child: SiteView()),
-                Divider(height: 0,).padding(leading: 50),
-                NavigationLink(title: 'Cabin', icon: Icons.ev_station_outlined, child: SiteView()),
+                // dynamic list of charging sites
+                for (var site in model.sites)
+                  NavigationLink(title: site.name, icon: Icons.ev_station_outlined, destination: SiteView(site: site))
               ],
+
             ),
             Section(
               headline: 'My easee',
+              separatorInset: 50,
               children: [
-                NavigationLink(title: 'Easee Keys', icon: Icons.key_outlined, child: DummyLink(title: 'Keys')),
-                Divider(height: 0,).padding(leading: 50),
-                NavigationLink(title: 'Notifications', icon: CupertinoIcons.bell, child: DummyLink(title: 'Notifications')),
-                Divider(height: 0,).padding(leading: 50),
-                NavigationLink(title: 'Settings', icon: CupertinoIcons.gear, child: DummyLink(title: 'Settings')),
+                const NavigationLink(title: 'Easee Keys', icon: Icons.key_outlined, destination: DummyLink(title: 'Keys')),
+                NavigationLink(title: 'Notifications', icon: CupertinoIcons.bell, destination: NotificationsView()),
+                const NavigationLink(title: 'Settings', icon: CupertinoIcons.gear, destination: DummyLink(title: 'Settings')),
               ],
             ),
-            Section(
+
+            const Section(
+              separatorInset: 50,
               children: [
-                NavigationLink(title: 'Support', icon: CupertinoIcons.question_circle, child: DummyLink(title: 'Support')),
-                Divider(height: 0,).padding(leading: 50),
-                NavigationLink(title: 'Log out', icon: CupertinoIcons.arrow_right_square, child: DummyLink(title: 'Log Out')),
+                NavigationLink(title: 'Support', icon: CupertinoIcons.question_circle, destination: DummyLink(title: 'Support')),
+                NavigationLink(title: 'Log out', icon: CupertinoIcons.arrow_right_square, destination: DummyLink(title: 'Log Out')),
               ],
             ),
 
@@ -64,10 +72,12 @@ class Section extends StatelessWidget {
   const Section({
     Key? key,
     this.headline = '',
-    this.children = const <Widget>[],
+    this.separatorInset = 16,
+    required this.children,
   }) : super(key: key);
   final List<Widget> children;
   final String headline;
+  final double separatorInset;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +93,16 @@ class Section extends StatelessWidget {
             color: CupertinoColors.secondarySystemGroupedBackground,
           ),
           child: Column(
-            children: children,
+            children:
+              // extract index and check if Divider should be displayed
+              children.mapIndexed((index, child) => Column(
+                children: [
+                  child.padding(vertical: 4, horizontal: 16),
+                  if (index != children.length - 1)
+                    const Divider(height: 0).padding(leading: separatorInset)
+                ],
+              )
+              ).toList()
           ),
         ),
       ],
@@ -99,9 +118,10 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       child: Row(
         children: [
-          Icon(CupertinoIcons.person_crop_circle_fill, color: CupertinoColors.activeBlue, size: SFFontSize.largeTitle),
+          Icon(CupertinoIcons.person_crop_circle, color: CupertinoColors.activeBlue, size: SFFontSize.largeTitle),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -126,20 +146,21 @@ class NavigationLink extends StatelessWidget {
     Key? key,
     required this.title,
     required this.icon,
-    required this.child,
+    required this.destination,
   }) : super(key: key);
   final String title;
   final IconData icon;
-  final Widget child;
+  final Widget destination;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       child: LabelView(title: title, icon: icon),
       onPressed: () { Navigator.push(
         context,
         CupertinoPageRoute(
-            builder: (context) => child
+            builder: (context) => destination
         ),
       );
       },

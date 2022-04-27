@@ -2,31 +2,46 @@ import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'MainMenuView.dart';
 import 'Styles.dart';
 
-class SiteDetailView extends StatelessWidget {
-  const SiteDetailView ({ Key? key }): super(key: key);
-  final int consumption = 2049;
+class SiteDetailView extends StatefulWidget {
+  @override
+  _SiteDetailViewState createState() => _SiteDetailViewState();
+}
+
+class _SiteDetailViewState extends State<SiteDetailView> {
+  int? selectedPeriod = 1;
 
   @override
   Widget build(BuildContext context) {
       return Column(
         children: [
+          CupertinoSlidingSegmentedControl<int>(
+              groupValue: selectedPeriod,
+              children: {
+                0: buildSegment('Month'),
+                1: buildSegment('Year'),
+                2: buildSegment('Total'),
+              },
+              onValueChanged: (value) {
+                setState(() { selectedPeriod = value; });
+              }
+          ),
           Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('$consumption', style: SFTextStyle.largeTitle.w(SFFontWeight.semibold)),
+              Text('${consumption(selectedPeriod ?? 0)}', style: SFTextStyle.largeTitle.w(SFFontWeight.semibold)),
               Text('kWh', style: SFTextStyle.subheadline)
                 .padding(all: 4),
             ],
-          ).padding(vertical: 16),
+          ).padding(vertical: 16).padding(top: 16),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CircleButton(icon: CupertinoIcons.chevron_back),
-              Spacer(),
-              Text('2021', style: SFTextStyle.subheadline),
-              Spacer(),
+              Text(periodLabel(selectedPeriod ?? 0), style: SFTextStyle.subheadline),
               CircleButton(icon: Icons.power_input_rounded),
             ],
           ).padding(vertical: 16),
@@ -35,30 +50,68 @@ class SiteDetailView extends StatelessWidget {
         ],
       ).padding(all: 16);
   }
+
+  // Functions
+  Text buildSegment(String title) => Text(title, style: SFTextStyle.subheadline.w(SFFontWeight.medium));
+
+  int consumption(int period) {
+    switch (period) {
+      case 0:
+        // Month
+        return 230;
+      case 1:
+        // Year
+        return 2049;
+      default:
+        return 6723;
+    }
+  }
+
+  String periodLabel(int period) {
+    switch (period) {
+      case 0:
+      // Month
+        return 'April 2022';
+      case 1:
+      // Year
+        return '2022';
+      default:
+        return '2020 - today';
+    }
+  }
 }
 
 // Subviews
 class OptionButton extends StatelessWidget {
   const OptionButton({
     Key? key,
-    required this.title
+    required this.title,
+    this.color = CupertinoColors.systemGroupedBackground,
   }) : super(key: key);
 
   final String title;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
-      color: CupertinoColors.systemGroupedBackground,
-      child: Row(
-        children: [
-          Text(title, style: SFTextStyle.body),
-          Spacer(),
-          Icon(CupertinoIcons.chevron_forward,
-            color: CupertinoColors.secondaryLabel,
-          size: SFFontSize.body)
-        ],
+      color: color,
+      child: CupertinoButton(
+        child: Row(
+          children: [
+            Text(title, style: SFTextStyle.body.c(Colors.black)),
+            Spacer(),
+            Icon(CupertinoIcons.chevron_forward,
+                color: CupertinoColors.secondaryLabel,
+                size: SFFontSize.body)
+          ],
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (context) => DummyLink(title: title)),
+          );
+        },
       ),
     );
   }

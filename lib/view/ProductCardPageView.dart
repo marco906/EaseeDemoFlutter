@@ -1,11 +1,14 @@
 import 'package:easee_demo/view/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import '../model/Model.dart';
 import 'ProductCardView.dart';
+import 'SiteDetailView.dart';
 import 'Styles.dart';
 
 class ProductCardPageView extends StatefulWidget {
+  const ProductCardPageView({Key? key, required this.site}) : super(key: key);
+  final ChargeSite site;
+
   @override
   _ProductCardPageViewState createState() => _ProductCardPageViewState();
 }
@@ -27,39 +30,39 @@ class _ProductCardPageViewState extends State<ProductCardPageView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          color: CupertinoColors.systemGroupedBackground,
-        ),
-        child: Column(
-          //shrinkWrap: true,
+    return Column(
           children: [
-            HeaderView(pageIndex: _pageIndex),
+            HeaderView(pageIndex: _pageIndex, pageCount: widget.site.chargers.length),
             SizedBox(
               height: 500,
               child: PageView(
                 controller: _controller,
                 children: [
-                  ProductCardView(robot: ChargeRobot(name: 'GARAGE 1', color: 'blue')),
-                  ProductCardView(robot: ChargeRobot(name: 'GARAGE 2', color: 'white')),
+                  // dynamically create pages for chargers in site
+                  for(var robot in widget.site.chargers ) ProductCardView(robot: robot)
                 ],
                 onPageChanged: _onPageViewChange,
               ),
-            )
+            ),
+            OptionButton(title: 'Power options', color: CupertinoColors.white)
+                .padding(horizontal: 16)
+                .padding(vertical:4),
+            OptionButton(title: 'Charger settings', color: CupertinoColors.white)
+                .padding(horizontal: 16)
+                .padding(vertical:4),
           ],
-        ),
-      );
+        );
   }
 }
 
 class HeaderView extends StatelessWidget {
   const HeaderView({
     Key? key,
-    required this.pageIndex,
+    required this.pageIndex, required this.pageCount,
   }) : super(key: key);
 
   final int pageIndex;
+  final int pageCount;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +76,7 @@ class HeaderView extends StatelessWidget {
             ],
           ).frame(width: 80),
           Spacer(),
-          Text('${pageIndex + 1}/2', style: SFTextStyle.subheadline.c(CupertinoColors.secondaryLabel)),
+          Text('${pageIndex + 1}/$pageCount', style: SFTextStyle.subheadline.c(CupertinoColors.secondaryLabel)),
           Spacer(),
           Icon(CupertinoIcons.info_circle, color: CupertinoColors.black)
               .alignment(alignment: Alignment.centerRight)

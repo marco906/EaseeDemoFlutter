@@ -28,11 +28,26 @@ class ChargeSite {
     required this.chargers,
   });
 
-  // Preview object
+  // Preview objects
   static ChargeSite get preview =>
       ChargeSite(name: "Home",
           chargers: [
             ChargeRobot(name: "GARAGE 1", color: 'blue'),
             ChargeRobot(name: "GARAGE 2", color: 'white'),
           ]);
+  static ChargeSite get preview2 =>
+      ChargeSite(name: "Cabin",
+          chargers: [
+            ChargeRobot(name: "CARPORT", color: 'red'),
+          ]);
+}
+
+// Global model that hold users charge site and settings
+class Model {
+  Model({ required this.sites });
+  List<ChargeSite> sites;
+
+  // Preview object
+  static Model get preview =>
+      Model(sites: [ChargeSite.preview, ChargeSite.preview2]);
 }

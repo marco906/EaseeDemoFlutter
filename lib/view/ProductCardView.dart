@@ -17,7 +17,7 @@ class ProductCardView extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+        children: [
           Text('Charging', style: SFTextStyle.title2.w(SFFontWeight.semibold))
             .padding(bottom: 8),
           Text(robot.name, style: SFTextStyle.subheadline
