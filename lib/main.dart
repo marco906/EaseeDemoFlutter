@@ -1,6 +1,6 @@
 import 'package:easee_demo/view/MainMenuView.dart';
 import 'package:easee_demo/view/SiteView.dart';
-import 'package:easee_demo/view/WidgetExtensions.dart';
+import 'package:easee_demo/view/utility/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'model/Model.dart';

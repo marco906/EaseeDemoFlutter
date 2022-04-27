@@ -1,6 +1,6 @@
+import 'package:easee_demo/view/utility/ListComponents.dart';
 import 'package:flutter/cupertino.dart';
-
-import 'MainMenuView.dart';
+import 'utility/ListComponents.dart';
 
 class NotificationsView extends StatefulWidget {
   const NotificationsView({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
-import 'package:easee_demo/view/Styles.dart';
+import 'package:easee_demo/view/utility/Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FeatureView extends StatelessWidget {
-  const FeatureView({required this.icon, required this.title, required this.subtitle, this.leading = true });
+  const FeatureView({Key? key, required this.icon, required this.title, required this.subtitle, this.leading = true }): super(key: key);
 
   final IconData icon;
   final String title;

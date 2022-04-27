@@ -1,7 +1,7 @@
 import 'package:easee_demo/model/Model.dart';
 import 'package:easee_demo/view/ProductCardPageView.dart';
 import 'package:easee_demo/view/SiteDetailView.dart';
-import 'package:easee_demo/view/WidgetExtensions.dart';
+import 'package:easee_demo/view/utility/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class SiteView extends StatelessWidget {
         border: null,
         transitionBetweenRoutes: MediaQuery.of(context).size.width < 550,
         trailing: (MediaQuery.of(context).size.width < 800) ? GestureDetector(
-          child: const Icon(CupertinoIcons.chevron_up),
+          child: const Icon(CupertinoIcons.chevron_up, color: Colors.black),
           onTap: () { toggleCard(); }
         ) : null
       ),

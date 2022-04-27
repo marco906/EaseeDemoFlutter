@@ -1,10 +1,10 @@
 import 'package:easee_demo/model/Model.dart';
-import 'package:easee_demo/view/WidgetExtensions.dart';
+import 'package:easee_demo/view/utility/WidgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'FeatureView.dart';
-import 'Styles.dart';
+import 'utility/FeatureView.dart';
+import 'utility/Styles.dart';
 
 class ProductCardView extends StatelessWidget {
   const ProductCardView({ Key? key, required this.robot }): super(key: key);
