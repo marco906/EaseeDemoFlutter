@@ -1,9 +1,9 @@
-import 'package:easee_demo/view/utility/WidgetExtensions.dart';
+import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
-import '../model/Model.dart';
+import '../model/model.dart';
 import 'ProductCardView.dart';
 import 'SiteDetailView.dart';
-import 'utility/Styles.dart';
+import 'utility/styles.dart';
 
 class ProductCardPageView extends StatefulWidget {
   const ProductCardPageView({Key? key, required this.site}) : super(key: key);

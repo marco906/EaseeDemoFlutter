@@ -1,9 +1,9 @@
-import 'package:easee_demo/model/Model.dart';
-import 'package:easee_demo/view/utility/Navigation.dart';
-import 'package:easee_demo/view/utility/WidgetExtensions.dart';
+import 'package:easee_demo/model/model.dart';
+import 'package:easee_demo/view/utility/navigation.dart';
+import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'utility/Styles.dart';
+import 'utility/styles.dart';
 
 class SiteDetailView extends StatefulWidget {
   const SiteDetailView({Key? key, required this.site}) : super(key: key);

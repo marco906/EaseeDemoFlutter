@@ -1,7 +1,7 @@
-import 'package:easee_demo/model/Model.dart';
-import 'package:easee_demo/view/ProductCardPageView.dart';
+import 'package:easee_demo/model/model.dart';
+import 'package:easee_demo/view/productCardPageView.dart';
 import 'package:easee_demo/view/SiteDetailView.dart';
-import 'package:easee_demo/view/utility/WidgetExtensions.dart';
+import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

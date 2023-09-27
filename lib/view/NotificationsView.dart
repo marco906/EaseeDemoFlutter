@@ -1,6 +1,5 @@
-import 'package:easee_demo/view/utility/ListComponents.dart';
+import 'package:easee_demo/view/utility/listComponents.dart';
 import 'package:flutter/cupertino.dart';
-import 'utility/ListComponents.dart';
 
 class NotificationsView extends StatefulWidget {
   const NotificationsView({Key? key}) : super(key: key);
