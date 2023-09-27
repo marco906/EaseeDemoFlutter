@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/cupertino.dart';
 
 // SwiftUI Style view modifiers for better reading and less nested code

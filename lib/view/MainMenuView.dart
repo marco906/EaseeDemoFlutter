@@ -1,13 +1,14 @@
+// ignore_for_file: file_names
+
 import 'package:easee_demo/model/model.dart';
-import 'package:easee_demo/view/SiteView.dart';
-import 'package:easee_demo/view/NotificationsView.dart';
+import 'package:easee_demo/view/siteView.dart';
+import 'package:easee_demo/view/notificationsView.dart';
+import 'package:easee_demo/view/utility/listComponents.dart';
 import 'package:easee_demo/view/utility/navigation.dart';
 import 'package:easee_demo/view/utility/styles.dart';
 import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'utility/listComponents.dart';
 
 // Main menu or sidebar view
 class MainMenuView extends StatelessWidget {

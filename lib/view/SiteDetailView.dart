@@ -1,9 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:easee_demo/model/model.dart';
 import 'package:easee_demo/view/utility/navigation.dart';
+import 'package:easee_demo/view/utility/styles.dart';
 import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'utility/styles.dart';
 
 class SiteDetailView extends StatefulWidget {
   const SiteDetailView({Key? key, required this.site}) : super(key: key);
@@ -14,28 +16,28 @@ class SiteDetailView extends StatefulWidget {
 }
 
 class _SiteDetailViewState extends State<SiteDetailView> {
-  int? selectedPeriod = 1;
+  PeriodType selectedPeriod = PeriodType.month;
 
   @override
   Widget build(BuildContext context) {
       return Column(
         children: [
           CupertinoSlidingSegmentedControl<int>(
-              groupValue: selectedPeriod,
+              groupValue: selectedPeriod.rawValue,
               children: {
                 0: buildSegment('Month'),
                 1: buildSegment('Year'),
                 2: buildSegment('Total'),
               },
               onValueChanged: (value) {
-                setState(() { selectedPeriod = value; });
+                setState(() { selectedPeriod = PeriodTypeUtils.from(value) ?? PeriodType.month; });
               }
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${consumption(selectedPeriod ?? 0)}', style: SFTextStyle.largeTitle.w(SFFontWeight.semibold)),
+              Text('${consumption(selectedPeriod)}', style: SFTextStyle.largeTitle.w(SFFontWeight.semibold)),
               Text('kWh', style: SFTextStyle.subheadline)
                 .padding(all: 4),
             ],
@@ -44,7 +46,7 @@ class _SiteDetailViewState extends State<SiteDetailView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const CircleButton(icon: CupertinoIcons.chevron_back),
-              Text(periodLabel(selectedPeriod ?? 0), style: SFTextStyle.subheadline),
+              Text(periodLabel(selectedPeriod), style: SFTextStyle.subheadline),
               const CircleButton(icon: Icons.power_input_rounded),
             ],
           ).padding(vertical: 16),
@@ -57,28 +59,26 @@ class _SiteDetailViewState extends State<SiteDetailView> {
   // Functions
   Text buildSegment(String title) => Text(title, style: SFTextStyle.subheadline.w(SFFontWeight.medium));
 
-  int consumption(int period) {
+  int consumption(PeriodType period) {
     switch (period) {
-      case 0:
-        // Month
+      case PeriodType.month:
         return (widget.site.consumption / 12).round();
-      case 1:
+      case PeriodType.year:
         // Year
         return widget.site.consumption;
-      default:
+      case PeriodType.total:
         return widget.site.consumption * 3;
     }
   }
 
-  String periodLabel(int period) {
-    switch (period) {
-      case 0:
-      // Month
+  String periodLabel(PeriodType period) {
+      switch (period) {
+      case PeriodType.month:
         return 'April 2022';
-      case 1:
-      // Year
+      case PeriodType.year:
+        // Year
         return '2022';
-      default:
+      case PeriodType.total:
         return '2020 - today';
     }
   }

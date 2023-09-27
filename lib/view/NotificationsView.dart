@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:easee_demo/view/utility/listComponents.dart';
 import 'package:flutter/cupertino.dart';
 

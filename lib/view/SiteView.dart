@@ -1,6 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:easee_demo/model/model.dart';
 import 'package:easee_demo/view/productCardPageView.dart';
-import 'package:easee_demo/view/SiteDetailView.dart';
+import 'package:easee_demo/view/siteDetailView.dart';
 import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

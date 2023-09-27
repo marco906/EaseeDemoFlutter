@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:easee_demo/view/utility/Styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

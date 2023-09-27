@@ -1,9 +1,8 @@
+import 'package:easee_demo/model/model.dart';
 import 'package:easee_demo/view/mainMenuView.dart';
-import 'package:easee_demo/view/SiteView.dart';
+import 'package:easee_demo/view/siteView.dart';
 import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
-
-import 'model/model.dart';
 
 void main() {
   runApp(const MyApp());

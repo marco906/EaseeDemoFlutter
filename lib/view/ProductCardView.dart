@@ -1,10 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:easee_demo/model/model.dart';
+import 'package:easee_demo/view/utility/featureView.dart';
+import 'package:easee_demo/view/utility/styles.dart';
 import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'utility/featureView.dart';
-import 'utility/styles.dart';
 
 class ProductCardView extends StatelessWidget {
   const ProductCardView({ Key? key, required this.robot }): super(key: key);
@@ -53,8 +54,8 @@ class ProductCardView extends StatelessWidget {
                   shape: StadiumBorder(),
                   color: Colors.white,
                 ),
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     FeatureView(icon: CupertinoIcons.bolt, title: '18A', subtitle: 'Available'),
                     Spacer(),
                     FeatureView(icon: CupertinoIcons.clock, title: 'Schedule', subtitle: 'Default', leading: false),

@@ -74,3 +74,33 @@ class Model extends ChangeNotifier {
   static Model get preview =>
       Model(sites: [ChargeSite.preview, ChargeSite.preview2]);
 }
+
+enum PeriodType {
+  month,
+  year,
+  total
+}
+
+extension PeriodTypeUtils on PeriodType {
+  int get rawValue {
+    switch (this) {
+      case PeriodType.month: return 0;
+      case PeriodType.year: return 1;
+      case PeriodType.total: return 2;
+    }
+  }
+
+  static PeriodType? from(int? value) {
+    if (value == null) {
+      return null;
+    }
+    switch (value) {
+      case 0: return PeriodType.month;
+      case 1: return PeriodType.year;
+      case 2: return PeriodType.total;
+      default:
+      break;
+    }
+    return null;
+  }
+}

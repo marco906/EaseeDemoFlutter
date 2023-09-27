@@ -1,9 +1,11 @@
+// ignore_for_file: file_names
+
+import 'package:easee_demo/model/model.dart';
+import 'package:easee_demo/view/productCardView.dart';
+import 'package:easee_demo/view/siteDetailView.dart';
+import 'package:easee_demo/view/utility/styles.dart';
 import 'package:easee_demo/view/utility/widgetExtensions.dart';
 import 'package:flutter/cupertino.dart';
-import '../model/model.dart';
-import 'ProductCardView.dart';
-import 'SiteDetailView.dart';
-import 'utility/styles.dart';
 
 class ProductCardPageView extends StatefulWidget {
   const ProductCardPageView({Key? key, required this.site}) : super(key: key);
